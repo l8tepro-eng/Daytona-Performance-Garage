@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Daytona Performance Garage — Qatar's #1 Buggy Specialists</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: #0A0A0A; color: #F5F5F5; font-family: 'Barlow', sans-serif; overflow-x: hidden; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; align-items: center; justify-content: space-between; padding: 16px 60px; background: rgba(10,10,10,0.95); backdrop-filter: blur(6px); border-bottom: 1px solid #1a1a1a; }
+.nav-logo img { height: 48px; width: auto; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #666; text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: #F5F5F5; }
+.nav-cta { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: #F5F5F5; background: #CC1111; padding: 12px 28px; text-decoration: none; }
+.nav-cta:hover { background: #AA0000; }
+
+/* HERO */
+.hero { position: relative; width: 100%; height: 100vh; overflow: hidden; background: #000; }
+.hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.75; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,10,10,0.88) 45%, rgba(10,10,10,0.2) 100%); }
+.hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 100px; }
+.hero-logo { margin-bottom: 28px; }
+.hero-logo img { height: 80px; width: auto; }
+.hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(64px, 11vw, 148px); line-height: 0.88; letter-spacing: 2px; color: #F5F5F5; }
+.hero-title .red { color: #CC1111; }
+.hero-line { width: 60px; height: 3px; background: #CC1111; margin: 28px 0; }
+.hero-sub { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.45); max-width: 480px; line-height: 1.6; }
+.hero-btns { display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap; }
+.btn-red { background: #CC1111; color: #F5F5F5; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; padding: 14px 40px; text-decoration: none; }
+.btn-red:hover { background: #AA0000; }
+.btn-ghost { border: 1px solid rgba(255,255,255,0.3); color: #F5F5F5; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; padding: 14px 40px; text-decoration: none; }
+.btn-ghost:hover { border-color: #CC1111; color: #CC1111; }
+
+/* TICKER */
+.ticker { background: #CC1111; overflow: hidden; padding: 13px 0; }
+.ticker-inner { display: flex; animation: ticker 22s linear infinite; white-space: nowrap; }
+.ticker-item { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 5px; color: #F5F5F5; padding: 0 36px; text-transform: uppercase; opacity: 0.9; }
+
+/* ABOUT */
+.about-section { padding: 100px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; background: #111; }
+.eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 6px; text-transform: uppercase; color: #CC1111; display: block; margin-bottom: 16px; }
+.sec-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 6vw, 78px); line-height: 0.92; letter-spacing: 2px; color: #F5F5F5; margin-bottom: 28px; }
+.sec-title .dim { color: #555; }
+.red-line { width: 48px; height: 3px; background: #CC1111; margin-bottom: 28px; }
+.body-text { font-size: 14px; font-weight: 300; color: #999; line-height: 1.85; margin-bottom: 14px; }
+.stats { display: flex; gap: 48px; margin-top: 40px; padding-top: 40px; border-top: 1px solid #222; }
+.stat-n { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: #CC1111; line-height: 1; display: block; }
+.stat-l { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-top: 4px; display: block; }
+.about-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border: 2px solid #222; }
+
+/* SERVICES */
+.services-section { padding: 100px; background: #0A0A0A; }
+.sec-header { margin-bottom: 60px; }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.svc-card { background: #161616; border: 1px solid #222; padding: 44px 36px; position: relative; }
+.svc-card:hover { background: #1c1c1c; border-color: #333; }
+.svc-num { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: rgba(204,17,17,0.4); margin-bottom: 20px; display: block; }
+.svc-card h4 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 2px; color: #F5F5F5; margin-bottom: 14px; }
+.svc-card p { font-size: 13px; font-weight: 300; color: #666; line-height: 1.75; }
+.svc-top-line { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #CC1111; transform: scaleX(0); transform-origin: left; transition: transform 0.35s; }
+.svc-card:hover .svc-top-line { transform: scaleX(1); }
+
+/* GALLERY */
+.gallery-section { background: #0A0A0A; }
+.gallery-header { padding: 80px 100px 48px; display: flex; justify-content: space-between; align-items: flex-end; }
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px; }
+.g-item { position: relative; overflow: hidden; }
+.g-item img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 0.4s; }
+.g-item:hover img { transform: scale(1.04); }
+.g-item.tall { grid-row: span 2; }
+.g-cap { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 20px 16px; background: linear-gradient(transparent, rgba(10,10,10,0.85)); }
+.g-cap span { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; color: #F5F5F5; }
+
+/* PROCESS */
+.process-section { padding: 100px; background: #111; }
+.process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 64px; }
+.proc-step { padding: 48px 36px; border-right: 1px solid #222; }
+.proc-step:last-child { border-right: none; }
+.proc-step:hover { background: #161616; }
+.proc-num { font-family: 'Bebas Neue', sans-serif; font-size: 72px; color: rgba(204,17,17,0.1); line-height: 1; margin-bottom: 20px; display: block; }
+.proc-step h4 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; color: #F5F5F5; margin-bottom: 12px; }
+.proc-step p { font-size: 13px; font-weight: 300; color: #666; line-height: 1.75; }
+
+/* CTA */
+.cta-section { background: #CC1111; padding: 100px; text-align: center; position: relative; overflow: hidden; }
+.cta-section::before { content: 'DPG'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: 'Bebas Neue', sans-serif; font-size: 300px; color: rgba(0,0,0,0.1); white-space: nowrap; pointer-events: none; letter-spacing: -8px; }
+.cta-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 6px; text-transform: uppercase; color: rgba(255,255,255,0.5); display: block; margin-bottom: 20px; position: relative; z-index: 2; }
+.cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 10vw, 130px); line-height: 0.88; letter-spacing: 2px; color: #F5F5F5; margin-bottom: 20px; position: relative; z-index: 2; }
+.cta-sub { font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.6); margin-bottom: 48px; letter-spacing: 2px; position: relative; z-index: 2; }
+.cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 2; }
+.btn-white { background: #F5F5F5; color: #CC1111; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; padding: 16px 44px; text-decoration: none; display: flex; align-items: center; gap: 12px; }
+.btn-white:hover { opacity: 0.9; }
+.btn-ol-white { border: 2px solid rgba(255,255,255,0.5); color: #F5F5F5; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 16px 44px; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.btn-ol-white:hover { border-color: #F5F5F5; }
+
+/* FOOTER */
+footer { background: #111; border-top: 1px solid #222; padding: 60px 100px; display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 60px; }
+.ftr-logo img { height: 52px; width: auto; margin-bottom: 16px; display: block; }
+.ftr-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; color: #555; letter-spacing: 2px; text-transform: uppercase; }
+.ftr-col h5 { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: #CC1111; margin-bottom: 20px; }
+.ftr-col a, .ftr-col p { font-size: 13px; font-weight: 300; color: #555; text-decoration: none; display: block; line-height: 2.2; transition: color 0.2s; }
+.ftr-col a:hover { color: #F5F5F5; }
+.footer-bottom { padding: 20px 100px; background: #000; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #1a1a1a; }
+.footer-bottom p { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; color: #444; letter-spacing: 3px; text-transform: uppercase; }
+
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+@media (max-width: 900px) {
+  nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .hero-content { padding: 0 28px; }
+  .hero-title { font-size: 64px; }
+  .about-section { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
+  .about-img { display: none; }
+  .services-section, .process-section, .cta-section { padding: 60px 24px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .gallery-header { padding: 60px 24px 32px; flex-direction: column; gap: 20px; align-items: flex-start; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .g-item.tall { grid-row: span 1; }
+  .process-grid { grid-template-columns: 1fr 1fr; }
+  footer { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
+  .footer-bottom { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo"><img src="logo.png" alt="Daytona Performance Garage"></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Our Work</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://www.instagram.com/dpg_motorsport" target="_blank" class="nav-cta">Contact Us</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <video autoplay muted loop playsinline>
+    <source src="video.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-logo"><img src="logo.png" alt="Daytona Performance Garage"></div>
+    <h1 class="hero-title">
+      BUILT FOR<br>
+      <span class="red">THE DUNES</span>
+    </h1>
+    <div class="hero-line"></div>
+    <p class="hero-sub">Qatar's Premier Buggy &amp; Off-Road Performance Specialists</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-red">Our Services</a>
+      <a href="https://www.instagram.com/dpg_motorsport" target="_blank" class="btn-ghost">@dpg_motorsport</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Daytona Performance Garage</span>
+    <span class="ticker-item"> · </span>
+    <span class="ticker-item">Buggy Specialists</span>
+    <span class="ticker-item"> · </span>
+    <span class="ticker-item">Engine &amp; Mechanical</span>
+    <span class="ticker-item"> · </span>
+    <span class="ticker-item">Custom Builds</span>
+    <span class="ticker-item"> · </span>
+    <span class="ticker-item">Tyres &amp; Wheels</span>
+    <span class="ticker-item"> · </span>
+    <span class="ticker-item">Paint &amp; Wraps</span>
+    <span class="ticker-item"> · </span>
+    <span class="ticker-item">Qatar</span>
+    <span class="ticker-item"> · </span>
+    <span class="ticker-item">Daytona Performance Garage</span>
+    <span class="ticker-item"> · </span>
+    <span class="ticker-item">Buggy Specialists</span>
+    <span class="ticker-item"> · </span>
+    <span class="ticker-item">Engine &amp; Mechanical</span>
+    <span class="ticker-item"> · </span>
+    <span class="ticker-item">Custom Builds</span>
+    <span class="ticker-item"> · </span>
+    <span class="ticker-item">Tyres &amp; Wheels</span>
+    <span class="ticker-item"> · </span>
+    <span class="ticker-item">Paint &amp; Wraps</span>
+    <span class="ticker-item"> · </span>
+    <span class="ticker-item">Qatar</span>
+    <span class="ticker-item"> · </span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div>
+    <span class="eyebrow">Who We Are</span>
+    <h2 class="sec-title">DAYTONA<br><span class="dim">PERFORMANCE GARAGE</span></h2>
+    <div class="red-line"></div>
+    <p class="body-text">Daytona Performance Garage is Qatar's leading specialist workshop for off-road buggies, UTVs, and performance vehicles. Whether it's a full engine rebuild, custom fabrication, or a tyre change — if it involves your buggy, we handle it.</p>
+    <p class="body-text">Our team of expert technicians brings decades of combined experience working on the toughest off-road machines — Can-Am, Polaris, and everything in between.</p>
+    <div class="stats">
+      <div><span class="stat-n">700+</span><span class="stat-l">Buggies Repaired</span></div>
+      <div><span class="stat-n">5+</span><span class="stat-l">Years Experience</span></div>
+      <div><span class="stat-n">QA</span><span class="stat-l">Qatar Based</span></div>
+    </div>
+  </div>
+  <div>
+    <img src="img1.jpg" alt="Daytona Performance Garage workshop" class="about-img">
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="sec-header">
+    <span class="eyebrow">What We Do</span>
+    <h2 class="sec-title">OUR <span class="dim">SERVICES</span></h2>
+  </div>
+  <div class="services-grid">
+    <div class="svc-card">
+      <div class="svc-top-line"></div>
+      <span class="svc-num">01</span>
+      <h4>Engine &amp; Mechanical</h4>
+      <p>Full engine rebuilds, diagnostics, performance tuning, and all mechanical repairs. We keep your machine running at peak performance.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-top-line"></div>
+      <span class="svc-num">02</span>
+      <h4>Tyres &amp; Wheels</h4>
+      <p>Tyre fitting, balancing, and wheel upgrades for all buggy and UTV models. From stock replacements to full off-road performance setups.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-top-line"></div>
+      <span class="svc-num">03</span>
+      <h4>Custom Fabrication</h4>
+      <p>Roll cages, bumpers, skid plates, and custom metalwork. Built to your spec, engineered to withstand the harshest desert conditions.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-top-line"></div>
+      <span class="svc-num">04</span>
+      <h4>Paint &amp; Wraps</h4>
+      <p>Custom paint jobs, vinyl wraps, and body restoration. Make your buggy look as good as it performs.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-top-line"></div>
+      <span class="svc-num">05</span>
+      <h4>Parts &amp; Upgrades</h4>
+      <p>Genuine and aftermarket parts sourcing, suspension upgrades, lighting kits, and performance accessories for all major brands.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-top-line"></div>
+      <span class="svc-num">06</span>
+      <h4>Full Servicing</h4>
+      <p>Routine maintenance, oil changes, filter replacements, and full service packages to keep your buggy in top condition all season.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section" id="work">
+  <div class="gallery-header">
+    <div>
+      <span class="eyebrow">Our Work</span>
+      <h2 class="sec-title">BUILT IN <span class="dim">OUR GARAGE</span></h2>
+    </div>
+    <a href="https://www.instagram.com/dpg_motorsport" target="_blank" class="btn-ghost">View More on Instagram</a>
+  </div>
+  <div class="gallery-grid">
+    <div class="g-item tall">
+      <img src="img1.jpg" alt="Workshop floor full of buggies">
+      <div class="g-cap"><span>Workshop Floor</span></div>
+    </div>
+    <div class="g-item">
+      <img src="img2.jpg" alt="Custom Can-Am build">
+      <div class="g-cap"><span>Custom Can-Am Builds</span></div>
+    </div>
+    <div class="g-item">
+      <img src="img3.jpg" alt="Maverick X RS build">
+      <div class="g-cap"><span>Maverick X RS</span></div>
+    </div>
+    <div class="g-item">
+      <img src="img2.jpg" alt="Full black-out build">
+      <div class="g-cap"><span>Full Black-Out Build</span></div>
+    </div>
+    <div class="g-item">
+      <img src="img3.jpg" alt="Performance build">
+      <div class="g-cap"><span>Performance Builds</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <span class="eyebrow">How It Works</span>
+  <h2 class="sec-title">THE <span class="dim">PROCESS</span></h2>
+  <div class="process-grid">
+    <div class="proc-step">
+      <span class="proc-num">01</span>
+      <h4>Contact Us</h4>
+      <p>Reach out via WhatsApp or Instagram. Tell us about your buggy and what you need — we respond fast.</p>
+    </div>
+    <div class="proc-step">
+      <span class="proc-num">02</span>
+      <h4>Inspection</h4>
+      <p>We carry out a full inspection of your vehicle and provide a clear quote with no hidden costs.</p>
+    </div>
+    <div class="proc-step">
+      <span class="proc-num">03</span>
+      <h4>We Get to Work</h4>
+      <p>Our expert technicians handle everything — repairs, upgrades, paint, fabrication — to the highest standard.</p>
+    </div>
+    <div class="proc-step">
+      <span class="proc-num">04</span>
+      <h4>Back on the Dunes</h4>
+      <p>We hand back your buggy ready to perform. Built right, finished right, ready for whatever the desert throws at it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <span class="cta-eyebrow">Ready to Get Started?</span>
+  <h2 class="cta-title">BRING US<br>YOUR BUGGY</h2>
+  <p class="cta-sub">Contact us on Instagram or WhatsApp to book your slot.</p>
+  <div class="cta-btns">
+    <a href="https://www.instagram.com/dpg_motorsport" target="_blank" class="btn-white">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#CC1111" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="16.5" cy="7.5" r="1"/></svg>
+      @dpg_motorsport
+    </a>
+    <a href="https://wa.me/97400000000" class="btn-ol-white">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      WhatsApp Us
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <img src="logo.png" alt="Daytona Performance Garage" style="height:52px;margin-bottom:16px;display:block;">
+    <p class="ftr-tag">Qatar's Premier Buggy Specialists</p>
+  </div>
+  <div class="ftr-col">
+    <h5>Services</h5>
+    <a href="#services">Engine &amp; Mechanical</a>
+    <a href="#services">Tyres &amp; Wheels</a>
+    <a href="#services">Custom Fabrication</a>
+    <a href="#services">Paint &amp; Wraps</a>
+    <a href="#services">Parts &amp; Upgrades</a>
+    <a href="#services">Full Servicing</a>
+  </div>
+  <div class="ftr-col">
+    <h5>Contact</h5>
+    <a href="https://www.instagram.com/dpg_motorsport" target="_blank">Instagram: @dpg_motorsport</a>
+    <a href="https://wa.me/97400000000">WhatsApp Us</a>
+    <p style="margin-top:8px;">Qatar &mdash; Available 7 days a week</p>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>&copy; 2026 Daytona Performance Garage. All rights reserved.</p>
+  <p>Built for the Dunes &middot; Qatar</p>
+</div>
+
+</body>
+</html>
